@@ -8,6 +8,7 @@ export async function middleware(request) {
       headers: {
         cookie: request.headers.get("cookie"),
       },
+      credentials: "include",
     });
 
     if (!response.ok) {
