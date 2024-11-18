@@ -34,13 +34,14 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.get("/", (req, res) => {
   res.send("API Running Successfully");

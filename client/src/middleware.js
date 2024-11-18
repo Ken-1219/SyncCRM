@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request) {
   const { NEXT_PUBLIC_API_URL } = process.env;
+  
+  if(!NEXT_PUBLIC_API_URL) {
+    throw new Error("NEXT_PUBLIC_API_URL is not defined");
+  }
 
   try {
     const response = await fetch(`${NEXT_PUBLIC_API_URL}/auth/session`, {
