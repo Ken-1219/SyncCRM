@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import session from "express-session";
 import passport from "passport";
+import MongoStore from "connect-mongo";
 import "./config/passport.js";
 
 const app = express();
@@ -24,13 +25,16 @@ connectDB();
 
 app.use(
   session({
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+    }),
     secret: process.env.SESSION_SECRET || "default_secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
 );
