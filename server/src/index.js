@@ -71,6 +71,9 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/auth/session", (req, res) => {
+  console.log("Session data:", req.session);
+  console.log("User in session:", req.user);
+
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
   } else {
